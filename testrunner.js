@@ -38,6 +38,7 @@ assert.deepStrictEqual(flattenator(config), [
 ]);
 
 // It supports an iterateFunction for further manipulating elements while looping
+config.persistKeys = ['name', 'newKey'];
 config.iterFunc = function(obj) {
   obj.newKey = `${obj.id} - ${obj.name}`;
 }
@@ -45,4 +46,37 @@ assert.deepStrictEqual(flattenator(config), [
   {name: 'boop', newKey: '1 - boop'},
   {name: 'snoop', newKey: '2 - snoop'},
   {name: 'zoop', newKey: '3 - zoop'},
+]);
+
+// iterFunc can manipulate further-nested objects
+delete config.iterFunc;
+config.persistKeys = ['name'];
+config.inputObject = {
+  ...parent,
+  children: [
+    {
+      ...child1,
+      children: [child2],
+    }
+  ]
+};
+
+assert.deepStrictEqual(flattenator(config), [
+  {name: 'boop'},
+  {name: 'snoop'},
+  {name: 'zoop'},
+]);
+
+config.persistKeys = ['name', 'nameChain'];
+config.iterFunc = function(obj) {
+  obj.nameChain = obj.nameChain ? `${obj.nameChain}>>${obj.name}` : obj.name;
+  (obj.children || []).forEach((c) => {
+    c.nameChain = obj.nameChain;
+  });
+}
+
+assert.deepStrictEqual(flattenator(config), [
+  {name: 'boop', nameChain: 'boop'},
+  {name: 'snoop', nameChain: 'boop>>snoop'},
+  {name: 'zoop', nameChain: 'boop>>snoop>>zoop'},
 ]);
