@@ -22,14 +22,16 @@ const child2 = {id: 3, name: 'zoop'};
 config.inputObject = {
   ...parent,
   children: [
-    ...child1,
-    ...child2,
+    child1,
+    child2,
   ]
 };
-assert.deepStrictEqual(flattenator(config), [...parent, ...child1, ...child2]);
+config.nestingKey = 'children';
+assert.deepStrictEqual(flattenator(config), [parent, child1, child2]);
 
 // It returns only the desired properties per flattened object
-config.persistVals = ['name'];
+config.persistKeys = ['name'];
+console.log(JSON.stringify(flattenator(config)));
 assert.deepStrictEqual(flattenator(config), [
   {name: 'boop'},
   {name: 'snoop'},
