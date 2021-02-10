@@ -2,12 +2,12 @@
 
 The Flattenator will completely flatten a given multidimensional array or deeply nested Javascript object. Hopefully you can avoid the data structures and workflows necessary to find this useful, but if you're working with wonky trees of data it may come in handy.
 
-Please note the array flattening behavior of this module differs from the native `Array.prototype.flat()`.
+Please note this does not have any customizable depth at this time, and the array flattening behavior of this module differs from the default usage of `Array.prototype.flat()`, shown below.
 ```js
 const arr = [0, 1, 2, [[[3, 4]]]];
 
-console.log(arr.flat(2));
-// expected output: [0, 1, 2, [3, 4]]
+console.log(arr.flat());
+// expected output: [0, 1, 2, [[3, 4]]]
 
 console.log(flattenator({inputObject: arr}));
 // expected output: [0, 1, 2, 3, 4]
