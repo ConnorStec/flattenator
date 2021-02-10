@@ -1,0 +1,12 @@
+{
+  "name": "flattenator",
+  "version": "1.0.0",
+  "description": "Recursive array or nested object flattening",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node testrunner.js"
+  },
+  "author": "Connor Stec",
+  "license": "ISC"
+}
