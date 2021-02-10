@@ -8,5 +8,8 @@
     "test": "node testrunner.js"
   },
   "author": "Connor Stec",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "jsdoc": "^3.6.6"
+  }
 }

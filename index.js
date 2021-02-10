@@ -1,3 +1,13 @@
+/**
+ * @module flattenator
+ * Flattens a given input array or nested object chain
+ * @param {Object} config - Config object.
+ * @param {Array.<any>|Object} inputObject - The base object to iterate over.
+ * @param {string} nestingKey - When working with nested objects, the property to follow and continue the recursion. This property will always be removed from the final output.
+ * @param {Array.<string>} persistKeys - When working with nested objects, the properties to return for each iterated object in the result.
+ * @param {Function} iterFunc - When working with nested objects, a custom function to run on each iteration to produce any custom results.
+ * @returns {Array.<any>} The resulting flattened array.
+ */
 export default function flattenator({
   inputObject,
   nestingKey,
@@ -18,7 +28,6 @@ export default function flattenator({
         }
       });
     } else {
-      // Just assume if it's not an arr then it's a nested object
       if (input) {
         output.push(formatObject(input));
         if (input[nestingKey]) flatten(input[nestingKey]);
