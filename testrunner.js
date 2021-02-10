@@ -36,3 +36,13 @@ assert.deepStrictEqual(flattenator(config), [
   {name: 'snoop'},
   {name: 'zoop'},
 ]);
+
+// It supports an iterateFunction for further manipulating elements while looping
+config.iterFunc = function(obj) {
+  obj.newKey = `${obj.id} - ${obj.name}`;
+}
+assert.deepStrictEqual(flattenator(config), [
+  {name: 'boop', newKey: '1 - boop'},
+  {name: 'snoop', newKey: '2 - snoop'},
+  {name: 'zoop', newKey: '3 - zoop'},
+]);

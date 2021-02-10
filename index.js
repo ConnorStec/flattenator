@@ -2,6 +2,7 @@ export default function flattenator({
   inputObject,
   nestingKey,
   persistKeys,
+  iterFunc,
 }) {
   const output = [];
   function flatten(input) {
@@ -25,8 +26,15 @@ export default function flattenator({
   }
 
   function formatObject(obj) {
+    /*
+    persistKeys should only affect the obj's original keys
+    If we're adding a key via a func, for sure it should stay
+    */
+    const preFuncKeys = Object.keys(obj);
+    if (iterFunc) iterFunc(obj);
     return Object.entries(obj).reduce((result, [key, value]) => {
       if ((key !== nestingKey) && (persistKeys ? persistKeys.includes(key) : true)) result[key] = value;
+      if (!preFuncKeys.includes(key)) result[key] = value;
       return result;
     }, {});
   }
