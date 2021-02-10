@@ -31,7 +31,6 @@ assert.deepStrictEqual(flattenator(config), [parent, child1, child2]);
 
 // It returns only the desired properties per flattened object
 config.persistKeys = ['name'];
-console.log(JSON.stringify(flattenator(config)));
 assert.deepStrictEqual(flattenator(config), [
   {name: 'boop'},
   {name: 'snoop'},

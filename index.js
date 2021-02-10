@@ -9,8 +9,10 @@ export default function flattenator({
       input.forEach((element) => {
         if (Array.isArray(element)) {
           flatten(element);
+        } else if (isObject(element)) {
+          output.push(formatObject(element));
         } else {
-          output.push(element)
+          output.push(element);
         }
       });
     } else {
@@ -31,4 +33,8 @@ export default function flattenator({
 
   flatten(inputObject);
   return output;
+}
+
+function isObject(input) {
+  return typeof input === 'object' && input !== null;
 }
