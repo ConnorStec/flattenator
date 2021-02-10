@@ -5,8 +5,7 @@ The Flattenator will completely flatten a given multidimensional array or deeply
 ```js
 import flattenator from 'flattenator';
 
-const nestedGroup =
-{
+const nestedGroup = {
   id: 1,
   name: 'parent1',
   children: [
